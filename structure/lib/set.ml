@@ -17,7 +17,9 @@ module Tree = struct
     | Leaf _ | Node _ -> false
 
 
-  (** l and r must be balanced, i.e., | l.height - r.height | <= 2 *)
+  (** l and r must be balanced, i.e., | l.height - r.height | <= 2
+      Create a tree that its value is [v] and has left-tree [l] and right-tree [r].
+  *)
   let create l v r =
     let hl = height l in
     let hr = height r in
@@ -26,7 +28,8 @@ module Tree = struct
 
 
   (** Same as create, but performs one step of rebalancing if necessary.
- Assumes l and r are balanaced and | l.height - r.height | <= 3. *)
+      Adjust l, r so that whole tree could be balanced.
+  *)
   let bal l v r =
     let hl = height l in
     let hr = height r in
