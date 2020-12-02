@@ -26,8 +26,7 @@ module Tree = struct
 
 
   (** Same as create, but performs one step of rebalancing if necessary.
- Assumes l and r are balanaced and | l.height - r.height | <= 3.
-*)
+ Assumes l and r are balanaced and | l.height - r.height | <= 3. *)
   let bal l v r =
     let hl = height l in
     let hr = height r in
