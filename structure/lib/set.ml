@@ -2,7 +2,7 @@
 module Tree = struct
   type 'a t =
     | Empty
-    | Leaf of 'a  (** same as Node (Empty, x, Empty, 1, 1) *)
+    | Leaf of 'a  (** same as Node (Empty, x, Empty, 1) *)
     | Node of 'a t * 'a * 'a t * int
         (** left tree, value, right tree, height *)
 
