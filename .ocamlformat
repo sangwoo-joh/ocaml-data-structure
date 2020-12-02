@@ -1,0 +1,5 @@
+let-binding-spacing = sparse
+margin = 80
+break-cases = toplevel
+break-infix = fit-or-vertical
+break-sequences = true
