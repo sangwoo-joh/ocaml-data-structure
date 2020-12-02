@@ -88,7 +88,9 @@ module Tree = struct
     try add t with Same -> t
 
 
-  (** Same as create/bal, but no assumptions are made on the relative heights of l/r *)
+  (** Same as create/bal, but no assumptions are made on the relative heights of l/r
+      This joins two left/right tree with the value [v], and balancing it.
+  *)
   let rec join l v r ~compare_elt =
     match (l, r) with
     | Empty, _ -> add r v ~compare_elt
@@ -126,18 +128,31 @@ module Tree = struct
     | Node (l, v, r, _) -> bal (remove_min_elt l) v r
 
 
+  (** Concatenate two trees.
+      These trees are ordered, i.e. [t1] < [t2].
+  *)
   let concat t1 t2 ~compare_elt =
     match (t1, t2) with
     | Empty, t | t, Empty -> t
     | _, _ -> join t1 (min_elt_exn t2) (remove_min_elt t2) ~compare_elt
 
 
+  (** Merge two trees.
+      These trees are ordered, i.e. [t1] < [t2].
+      Assume | h(l) - h(r) | <= 2.
+  *)
   let merge t1 t2 =
     match (t1, t2) with
     | Empty, t | t, Empty -> t
     | _, _ -> bal t1 (min_elt_exn t2) (remove_min_elt t2)
 
 
+  (** Split [t] based on [x].
+      If there is a value same as [x] then [Some x] will be returned,
+      otherwise [None].
+      Splitted left and right trees are ordered,
+      i.e. [l, v_opt, r = split t x ~compare_elt] means [l] < [v_opt] < [r].
+  *)
   let split t x ~compare_elt =
     let rec split = function
       | Empty -> (Empty, None, Empty)
