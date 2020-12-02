@@ -64,6 +64,10 @@ module Tree = struct
       if h = 1 then Leaf v else Node (l, v, r, h)
 
 
+  (* Below is Set operators *)
+
+  let empty = Empty
+
   exception Same
 
   let add t x ~compare_elt =
@@ -153,8 +157,6 @@ module Tree = struct
     in
     split t
 
-
-  let empty = Empty
 
   let rec mem t x ~compare_elt =
     match t with
