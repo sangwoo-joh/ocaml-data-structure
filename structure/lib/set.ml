@@ -45,8 +45,7 @@ module Tree = struct
                 create (create ll lv lrl) lrv (create lrr v r) )
     else if hr > hl + 2 then
       match r with
-      | Empty -> assert false
-      | Leaf rv -> create (create l v Empty) rv Empty
+      | Empty | Leaf _ -> assert false
       | Node (rl, rv, rr, _) -> (
           if height rr >= height rl then create (create l v rl) rv rr
           else
