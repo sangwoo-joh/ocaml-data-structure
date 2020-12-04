@@ -392,4 +392,27 @@ module Tree = struct
             match find_map l ~f with
             | None -> find_map r ~f
             | Some _ as x -> x ) )
+
+
+  let choose = function
+    | Empty -> None
+    | Leaf v -> Some v
+    | Node (_, v, _, _) -> Some v
+
+
+  let of_list l ~compare_elt =
+    List.fold_left (fun t x -> add t x ~compare_elt) empty l
+
+
+  let to_list t =
+    let rec elements acc = function
+      | Empty -> acc
+      | Leaf v -> v :: acc
+      | Node (l, v, r, _) -> elements (v :: elements acc r) l
+    in
+    elements [] t
+
+
+  let of_array arr ~compare_elt =
+    Array.fold_left (fun t x -> add t x ~compare_elt) empty arr
 end
